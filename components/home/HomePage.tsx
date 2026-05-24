@@ -308,6 +308,7 @@ const HomePage = () => {
                           alt="Front view of Carmel Oasis surrounded by landscaped paths and palm trees."
                           fill
                           priority
+                          loading="eager"
                           sizes="(max-width: 900px) 100vw, 50vw"
                           style={{ objectFit: "cover" }}
                         />
