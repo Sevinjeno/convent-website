@@ -70,14 +70,6 @@ const faqStructuredData = {
         text: "Yes. The home is shaped around belonging, shared routines, visits, prayer, and community life so elders are not left to feel alone.",
       },
     },
-    {
-      "@type": "Question",
-      name: "How can families or well-wishers get involved?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Families can enquire about care and visits, while well-wishers can support the mission through volunteering, donations, and acts of service.",
-      },
-    },
   ],
 };
 

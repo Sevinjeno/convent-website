@@ -138,11 +138,6 @@ const faqs = [
     answer:
       "Yes. The home is shaped around belonging, shared routines, visits, prayer, and community life so elders are not left to feel alone.",
   },
-  {
-    question: "How can families or well-wishers get involved?",
-    answer:
-      "Families can enquire about care and visits, while well-wishers can support the mission through volunteering, donations, and acts of service. Verified contact details can be added here for direct enquiries.",
-  },
 ];
 
 const contact = {
@@ -917,19 +912,6 @@ const HomePage = () => {
                         }}
                       >
                         Looking for a caring old age home for someone you love?
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        sx={{
-                          color: "text.secondary",
-                          maxWidth: 720,
-                          fontSize: { xs: "0.95rem", md: "1.05rem" },
-                          lineHeight: { xs: 1.62, md: 1.75 },
-                        }}
-                      >
-                        Reach out to learn more about life at Pushpasadan,
-                        visiting possibilities, resident care, and ways to
-                        support the sisters in their service to elders.
                       </Typography>
                     </Stack>
                   </Grid>
