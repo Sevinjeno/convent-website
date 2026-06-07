@@ -1,6 +1,7 @@
 import Footer from "@/components/common/Footer";
 import Navbar from "@/components/common/Navbar";
 import HomePage from "@/components/home/HomePage";
+import { galleryPhotos } from "@/constants/gallery";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -43,11 +44,7 @@ const elderlyCareStructuredData = {
     contactType: "resident care enquiries",
     name: "Sr. Anishya",
   },
-  image: [
-    "/photos/carmel-oasis-exterior.jpg",
-    "/photos/sisters-front.jpg",
-    "/photos/community-team.jpg",
-  ],
+  image: galleryPhotos.slice(0, 3).map((photo) => photo.src),
 };
 
 const faqStructuredData = {

@@ -1,12 +1,10 @@
 "use client";
 
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
-import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import HealthAndSafetyRoundedIcon from "@mui/icons-material/HealthAndSafetyRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import KeyboardArrowRightRoundedIcon from "@mui/icons-material/KeyboardArrowRightRounded";
-import LandscapeRoundedIcon from "@mui/icons-material/LandscapeRounded";
 import LocalPhoneRoundedIcon from "@mui/icons-material/LocalPhoneRounded";
 import PhotoLibraryRoundedIcon from "@mui/icons-material/PhotoLibraryRounded";
 import PlaceRoundedIcon from "@mui/icons-material/PlaceRounded";
@@ -31,7 +29,8 @@ import {
 import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import GallerySection from "./GallerySection";
 
 const highlights = [
   "Convent-led care rooted in dignity, prayer, and respect",
@@ -84,49 +83,6 @@ const stats = [
   { value: "Care", label: "meals, companionship, and daily support" },
 ];
 
-const gallery = [
-  {
-    src: "/photos/carmel-oasis-exterior.jpg",
-    title: "Carmel Oasis exterior",
-    kicker: "Arrival view",
-    alt: "Front exterior view of the Carmel Oasis building with cross-topped domes and landscaped grounds.",
-    description:
-      "The entrance reflects a calm and welcoming home where elders can live with dignity, safety, and a sense of belonging.",
-  },
-  {
-    src: "/photos/sisters-front.jpg",
-    title: "The sisters at the entrance",
-    kicker: "Leadership and care",
-    alt: "Five sisters standing in front of the Carmel Oasis entrance garden.",
-    description:
-      "The sisters bring prayerful service, patience, and personal attention to the life of the home.",
-  },
-  {
-    src: "/photos/community-team.jpg",
-    title: "Volunteers and community members",
-    kicker: "Shared mission",
-    alt: "A group of volunteers and community members gathered together on the Carmel Oasis campus.",
-    description:
-      "Volunteers and friends add warmth to the home, reminding residents that they are remembered, valued, and loved.",
-  },
-  {
-    src: "/photos/garden-view.jpg",
-    title: "Kitchen garden and landscape",
-    kicker: "Nature and nourishment",
-    alt: "A cultivated garden plot at Carmel Oasis with greenery and hills in the background.",
-    description:
-      "The garden and open surroundings create a restorative atmosphere where residents can enjoy fresh air, quiet walks, and simple beauty.",
-  },
-  {
-    src: "/photos/visitors-community.jpg",
-    title: "Guests and fellowship",
-    kicker: "Welcoming spirit",
-    alt: "Visitors and sisters gathered together outside the Carmel Oasis building.",
-    description:
-      "Visits, conversations, and shared moments help make the home feel alive with human connection.",
-  },
-];
-
 const faqs = [
   {
     question: "What kind of care does Pushpasadan Old Age Home provide?",
@@ -161,10 +117,6 @@ const fadeUp = (reducedMotion: boolean) => ({
 const HomePage = () => {
   const prefersReducedMotion = useReducedMotion();
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [activePhoto, setActivePhoto] = useState(0);
-  const imageSectionRef = useRef<HTMLDivElement | null>(null);
-
-  const featuredPhoto = gallery[activePhoto];
 
   useEffect(() => {
     setReducedMotion(Boolean(prefersReducedMotion));
@@ -302,8 +254,7 @@ const HomePage = () => {
                           src="/photos/carmel-oasis-exterior.jpg"
                           alt="Front view of Carmel Oasis surrounded by landscaped paths and palm trees."
                           fill
-                          priority
-                          loading="eager"
+                          preload
                           sizes="(max-width: 900px) 100vw, 50vw"
                           style={{ objectFit: "cover" }}
                         />
@@ -542,221 +493,7 @@ const HomePage = () => {
           </Container>
         </Box>
 
-        <Container sx={{ py: { xs: 7, md: 10 } }} id="gallery">
-          <Grid
-            container
-            spacing={{ xs: 4, md: 5 }}
-            sx={{ alignItems: "stretch" }}
-          >
-            {/* IMAGE FIRST ON MOBILE */}
-          <Grid
-  size={{ xs: 12, md: 7 }}
-  sx={{ order: { xs: 1, md: 2 } }}
->
-              <m.div
-              ref={imageSectionRef}
-                key={activePhoto}
-                initial={{ opacity: 0, y: reducedMotion ? 0 : 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: reducedMotion ? 0 : 0.4,
-                  ease: "easeOut",
-                }}
-              >
-                <Card
-                  sx={{
-                    overflow: "hidden",
-                    bgcolor: "rgba(255,255,255,0.9)",
-                  }}
-                >
-                  <Box
-                    sx={{ position: "relative", height: { xs: 320, md: 500 } }}
-                  >
-                    <Image
-                      src={featuredPhoto.src}
-                      alt={featuredPhoto.alt}
-                      fill
-                      sizes="(max-width: 900px) 100vw, 58vw"
-                      style={{ objectFit: "cover" }}
-                    />
-                  </Box>
-
-                  <CardContent sx={{ p: { xs: 2, md: 3.5 } }}>
-                    <Stack spacing={1.5}>
-                      <Stack
-                        direction={{ xs: "column", sm: "row" }}
-                        spacing={1}
-                        sx={{ justifyContent: "space-between" }}
-                      >
-                        <Chip
-                          icon={<AutoAwesomeRoundedIcon />}
-                          label={featuredPhoto.kicker}
-                          sx={{ alignSelf: "flex-start" }}
-                        />
-
-                        <Stack direction="row" spacing={1}>
-                          <Chip
-                            icon={<PlaceRoundedIcon />}
-                            label="Carmel Oasis"
-                          />
-                          <Chip
-                            icon={<LandscapeRoundedIcon />}
-                            label="Peaceful campus"
-                          />
-                        </Stack>
-                      </Stack>
-
-                      <Typography variant="h3">
-                        {featuredPhoto.title}
-                      </Typography>
-
-                      <Typography variant="body1" color="text.secondary">
-                        {featuredPhoto.description}
-                      </Typography>
-                    </Stack>
-                  </CardContent>
-                </Card>
-              </m.div>
-            </Grid>
-
-            {/* BUTTONS BELOW IMAGE ON MOBILE */}
-            <Grid size={{ xs: 12, md: 5 }} sx={{ order: { xs: 2, md: 1 } }}>
-              <m.div {...fadeUp(reducedMotion)}>
-                <Stack spacing={2}>
-                  <Typography
-                    variant="overline"
-                    sx={{
-                      color: "primary.main",
-                      letterSpacing: "0.12em",
-                    }}
-                  >
-                    Life at the home
-                  </Typography>
-
-                  <Typography variant="h2">
-                    Glimpses of the people and places that make Carmel Oasis
-                    feel personal.
-                  </Typography>
-
-                  <Typography variant="body1" color="text.secondary">
-                    Explore the campus, gardens, sisters, visitors, and
-                    community moments that show the gentle spirit of Pushpasadan
-                    Old Age Home.
-                  </Typography>
-                </Stack>
-              </m.div>
-
-              <Stack spacing={1.2} sx={{ mt: 4 }}>
-                {gallery.map((item, index) => (
-                  <m.div key={item.title} {...fadeUp(reducedMotion)}>
-                    <Button
-                      fullWidth
-                      onClick={() => {
-                        setActivePhoto(index);
-                        if (window.innerWidth < 900) {
-                          setTimeout(() => {
-                            imageSectionRef.current?.scrollIntoView({
-                              behavior: "smooth",
-                              block: "nearest",
-                            });
-                          }, 100);
-                        }
-                      }}
-                      variant={activePhoto === index ? "contained" : "text"}
-                      color={activePhoto === index ? "primary" : "inherit"}
-                      sx={{
-                        justifyContent: "space-between",
-                        px: 2,
-                        py: 1.5,
-                        borderRadius: 3,
-                        border:
-                          activePhoto === index
-                            ? "1px solid transparent"
-                            : "1px solid rgba(47, 111, 115, 0.14)",
-                        bgcolor:
-                          activePhoto === index
-                            ? "primary.main"
-                            : "rgba(255,255,255,0.68)",
-                        color:
-                          activePhoto === index
-                            ? "common.white"
-                            : "text.primary",
-                        boxShadow:
-                          activePhoto === index
-                            ? "0 10px 24px rgba(47,111,115,0.22)"
-                            : "none",
-                        transition: "all 0.25s ease",
-                      }}
-                    >
-                      <Stack spacing={0.2} sx={{ textAlign: "left" }}>
-                        <Typography variant="body2" sx={{ fontWeight: 800 }}>
-                          {item.kicker}
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            color:
-                              activePhoto === index
-                                ? "rgba(255,255,255,0.82)"
-                                : "text.secondary",
-                          }}
-                        >
-                          {item.title}
-                        </Typography>
-                      </Stack>
-                      <KeyboardArrowRightRoundedIcon />
-                    </Button>
-                  </m.div>
-                ))}
-              </Stack>
-            </Grid>
-          </Grid>
-        </Container>
-
-        <Container sx={{ py: { xs: 4, md: 6 } }} id="stories">
-          <Grid container spacing={3}>
-            {gallery.map((item) => (
-              <Grid key={item.title} size={{ xs: 12, sm: 6, md: 4 }}>
-                <m.div {...fadeUp(reducedMotion)}>
-                  <Card
-                    sx={{
-                      height: "100%",
-                      overflow: "hidden",
-                      bgcolor: "rgba(255,255,255,0.86)",
-                    }}
-                  >
-                    <Box sx={{ position: "relative", height: 240 }}>
-                      <Image
-                        src={item.src}
-                        alt={item.alt}
-                        fill
-                        sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-                        style={{ objectFit: "cover" }}
-                      />
-                    </Box>
-                    <CardContent sx={{ p: 2.5 }}>
-                      <Stack spacing={1}>
-                        <Typography
-                          variant="overline"
-                          sx={{
-                            color: "primary.main",
-                            letterSpacing: "0.12em",
-                          }}
-                        >
-                          {item.kicker}
-                        </Typography>
-                        <Typography variant="h4">{item.title}</Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {item.description}
-                        </Typography>
-                      </Stack>
-                    </CardContent>
-                  </Card>
-                </m.div>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+        <GallerySection />
 
         <Box sx={{ bgcolor: "rgba(255,255,255,0.56)" }}>
           <Container sx={{ py: { xs: 5, md: 9 } }}>
