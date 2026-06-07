@@ -15,7 +15,14 @@ import {
 } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  TouchEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { galleryPhotos } from "@/constants/gallery";
 
 const INITIAL_VISIBLE_PHOTOS = 8;
@@ -25,6 +32,7 @@ const easeOut = [0.22, 1, 0.36, 1] as const;
 export default function GallerySection() {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
   const visiblePhotos = useMemo(
     () =>
@@ -49,6 +57,27 @@ export default function GallerySection() {
       index === null ? null : (index + 1) % galleryPhotos.length
     );
   }, []);
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const start = touchStartRef.current;
+    touchStartRef.current = null;
+    if (!start) return;
+
+    const touch = event.changedTouches[0];
+    const diffX = touch.clientX - start.x;
+    const diffY = touch.clientY - start.y;
+    const isHorizontalSwipe =
+      Math.abs(diffX) > 48 && Math.abs(diffX) > Math.abs(diffY) * 1.4;
+
+    if (!isHorizontalSwipe) return;
+    if (diffX < 0) next();
+    else prev();
+  };
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -389,6 +418,8 @@ export default function GallerySection() {
               }}
             >
               <Box
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
                 sx={{
                   position: "relative",
                   width: "100%",
@@ -396,6 +427,7 @@ export default function GallerySection() {
                   borderRadius: "6px",
                   overflow: "hidden",
                   bgcolor: "#160f08",
+                  touchAction: "pan-y",
                 }}
               >
                 <Image
