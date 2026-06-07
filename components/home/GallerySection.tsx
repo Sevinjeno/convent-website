@@ -37,7 +37,7 @@ export default function GallerySection() {
   const visiblePhotos = useMemo(
     () =>
       showAll ? galleryPhotos : galleryPhotos.slice(0, INITIAL_VISIBLE_PHOTOS),
-    [showAll]
+    [showAll],
   );
 
   const hasMorePhotos = galleryPhotos.length > INITIAL_VISIBLE_PHOTOS;
@@ -48,13 +48,13 @@ export default function GallerySection() {
     setLightbox((index) =>
       index === null
         ? null
-        : (index - 1 + galleryPhotos.length) % galleryPhotos.length
+        : (index - 1 + galleryPhotos.length) % galleryPhotos.length,
     );
   }, []);
 
   const next = useCallback(() => {
     setLightbox((index) =>
-      index === null ? null : (index + 1) % galleryPhotos.length
+      index === null ? null : (index + 1) % galleryPhotos.length,
     );
   }, []);
 
@@ -106,6 +106,8 @@ export default function GallerySection() {
       sx={{
         py: { xs: 5.5, md: 8 },
         bgcolor: "#f6f1e7",
+        overflowX: "hidden",
+        width: "100%",
       }}
     >
       <Container maxWidth="lg">
@@ -278,7 +280,11 @@ export default function GallerySection() {
                       <Typography
                         sx={{
                           fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: { xs: "0.98rem", sm: "1.1rem", md: "1.2rem" },
+                          fontSize: {
+                            xs: "0.98rem",
+                            sm: "1.1rem",
+                            md: "1.2rem",
+                          },
                           fontWeight: 500,
                           lineHeight: 1.15,
                           display: "-webkit-box",
@@ -351,6 +357,9 @@ export default function GallerySection() {
               alignItems: "center",
               justifyContent: "center",
               padding: "72px 16px 28px",
+              overflowX: "hidden",
+              width: "100vw",
+              maxWidth: "100vw",
             }}
           >
             <IconButton
@@ -358,11 +367,17 @@ export default function GallerySection() {
               aria-label="Close gallery"
               sx={{
                 position: "fixed",
-                top: { xs: 14, md: 20 },
-                right: { xs: 14, md: 20 },
-                color: "#f7efdf",
-                bgcolor: "rgba(255,255,255,0.1)",
-                "&:hover": { bgcolor: "rgba(255,255,255,0.18)" },
+                top: "max(12px, env(safe-area-inset-top))",
+                right: "max(12px, env(safe-area-inset-right))",
+                zIndex: 2000,
+                width: 48,
+                height: 48,
+                color: "#fff",
+                bgcolor: "rgba(0,0,0,0.55)",
+                backdropFilter: "blur(6px)",
+                "&:hover": {
+                  bgcolor: "rgba(0,0,0,0.75)",
+                },
               }}
             >
               <CloseRoundedIcon />
@@ -376,6 +391,7 @@ export default function GallerySection() {
               aria-label="Previous photo"
               sx={{
                 position: "fixed",
+                display: { xs: "none", md: "flex" },
                 left: { xs: 8, md: 24 },
                 color: "#f7efdf",
                 bgcolor: "rgba(255,255,255,0.1)",
@@ -393,6 +409,7 @@ export default function GallerySection() {
               aria-label="Next photo"
               sx={{
                 position: "fixed",
+                display: { xs: "none", md: "flex" },
                 right: { xs: 8, md: 24 },
                 color: "#f7efdf",
                 bgcolor: "rgba(255,255,255,0.1)",

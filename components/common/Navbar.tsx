@@ -31,78 +31,80 @@ const Navbar = () => {
         borderBottom: "1px solid rgba(47, 111, 115, 0.12)",
       }}
     >
-      <Container>
-        <Toolbar disableGutters sx={{ minHeight: 80 }}>
-          <Typography
-            component={Link}
-            href="/"
-            variant="h5"
-            sx={{
-              textDecoration: "none",
-              color: "primary.dark",
-              fontFamily: '"Cormorant Garamond", serif',
-              fontWeight: 700,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            Pushpasadan
-          </Typography>
-
-          <Box sx={{ flexGrow: 1 }} />
-
-          <Stack direction="row" spacing={1} sx={{ display: { xs: "none", md: "flex" } }}>
-            {NAV_LINKS.map((link) => (
-              <Button
-                key={link.name}
+      <ClickAwayListener onClickAway={() => setOpen(false)}>
+        <Box>
+          <Container>
+            <Toolbar disableGutters sx={{ minHeight: 80 }}>
+              <Typography
                 component={Link}
-                href={link.href}
-                color="inherit"
-                sx={{ color: "text.primary" }}
+                href="/"
+                variant="h5"
+                sx={{
+                  textDecoration: "none",
+                  color: "primary.dark",
+                  fontFamily: '"Cormorant Garamond", serif',
+                  fontWeight: 700,
+                  letterSpacing: "-0.03em",
+                }}
               >
-                {link.name}
-              </Button>
-            ))}
-          </Stack>
+                Pushpasadan
+              </Typography>
 
-          <IconButton
-            aria-label={open ? "close navigation" : "open navigation"}
-            aria-expanded={open}
-            onClick={() => setOpen((value) => !value)}
-            sx={{ display: { xs: "inline-flex", md: "none" }, color: "primary.dark" }}
-          >
-            {open ? <CloseRoundedIcon /> : <MenuRoundedIcon />}
-          </IconButton>
-        </Toolbar>
-      </Container>
+              <Box sx={{ flexGrow: 1 }} />
 
-      {open ? (
-        <ClickAwayListener onClickAway={() => setOpen(false)}>
-          <Box
-            sx={{
-              display: { xs: "block", md: "none" },
-              borderTop: "1px solid rgba(47, 111, 115, 0.12)",
-              bgcolor: "rgba(246, 251, 248, 0.98)",
-              boxShadow: "0 18px 42px rgba(31, 63, 61, 0.12)",
-            }}
-          >
-            <Container sx={{ py: 2 }}>
-              <Stack spacing={1}>
+              <Stack direction="row" spacing={1} sx={{ display: { xs: "none", md: "flex" } }}>
                 {NAV_LINKS.map((link) => (
                   <Button
                     key={link.name}
                     component={Link}
                     href={link.href}
-                    onClick={() => setOpen(false)}
-                    sx={{ justifyContent: "flex-start", color: "text.primary" }}
+                    color="inherit"
+                    sx={{ color: "text.primary" }}
                   >
                     {link.name}
                   </Button>
                 ))}
               </Stack>
-            </Container>
-          </Box>
-        </ClickAwayListener>
-      ) : null}
+
+              <IconButton
+                aria-label={open ? "close navigation" : "open navigation"}
+                aria-expanded={open}
+                onClick={() => setOpen((prev) => !prev)}
+                sx={{ display: { xs: "inline-flex", md: "none" }, color: "primary.dark" }}
+              >
+                {open ? <CloseRoundedIcon /> : <MenuRoundedIcon />}
+              </IconButton>
+            </Toolbar>
+          </Container>
+
+          {open && (
+            <Box
+              sx={{
+                display: { xs: "block", md: "none" },
+                borderTop: "1px solid rgba(47, 111, 115, 0.12)",
+                bgcolor: "rgba(246, 251, 248, 0.98)",
+                boxShadow: "0 18px 42px rgba(31, 63, 61, 0.12)",
+              }}
+            >
+              <Container sx={{ py: 2 }}>
+                <Stack spacing={1}>
+                  {NAV_LINKS.map((link) => (
+                    <Button
+                      key={link.name}
+                      component={Link}
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      sx={{ justifyContent: "flex-start", color: "text.primary" }}
+                    >
+                      {link.name}
+                    </Button>
+                  ))}
+                </Stack>
+              </Container>
+            </Box>
+          )}
+        </Box>
+      </ClickAwayListener>
     </AppBar>
   );
 };
