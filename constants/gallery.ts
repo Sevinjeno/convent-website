@@ -56,6 +56,15 @@ export const galleryPhotos: GalleryPhoto[] = [
     aspectRatio: "4 / 3",
     featured: true,
   },
+  {
+    src: "/photos/oldagehome_5.jpeg",
+    title: "Gentle presence",
+    kicker: "Convent care",
+    alt: "A sister offering gentle support to elderly residents in the care home.",
+    description:
+      "The sisters bring a calm and prayerful presence to daily life, offering support with patience and dignity.",
+    aspectRatio: "3 / 4",
+  },
   
   {
     src: "/photos/oldagehome_2.jpeg",
@@ -93,15 +102,7 @@ export const galleryPhotos: GalleryPhoto[] = [
       "Memories become a bridge between generations, giving elders a chance to feel seen, heard, and valued.",
     aspectRatio: "3 / 4",
   },
-  {
-    src: "/photos/oldagehome_5.jpeg",
-    title: "Gentle presence",
-    kicker: "Convent care",
-    alt: "A sister offering gentle support to elderly residents in the care home.",
-    description:
-      "The sisters bring a calm and prayerful presence to daily life, offering support with patience and dignity.",
-    aspectRatio: "3 / 4",
-  },
+  
 
   {
     src: "/photos/oldagehome_1.jpeg",
