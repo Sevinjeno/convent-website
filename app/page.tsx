@@ -1,7 +1,8 @@
-import Footer from "@/components/common/Footer";
-import Navbar from "@/components/common/Navbar";
-import HomePage from "@/components/home/HomePage";
-import { galleryPhotos } from "@/constants/gallery";
+// import Footer from "@/components/common/Footer";
+// import Navbar from "@/components/common/Navbar";
+// import HomePage from "@/components/home/HomePage";
+import WorkInProgress from "@/components/nocode/WorkinProgress.tsx";
+// import { galleryPhotos } from "@/constants/gallery";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -22,58 +23,58 @@ export const metadata: Metadata = {
   },
 };
 
-const elderlyCareStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "ElderlyCare",
-  name: "Carmel Oasis at Pushpasadan Old Age Home",
-  alternateName: "Pushpasadan Old Age Home",
-  telephone: "+91 8766480884",
-  description:
-    "A convent-led elder care home offering peaceful residential support, daily care, companionship, prayer, and dignity for senior residents.",
-  serviceType: "Residential elder care",
-  areaServed: "India",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Carmel Oasis, Wanjale",
-    addressRegion: "Raigad",
-    addressCountry: "IN",
-  },
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+91 8766480884",
-    contactType: "resident care enquiries",
-    name: "Sr. Anishya",
-  },
-  image: galleryPhotos.slice(0, 3).map((photo) => photo.src),
-};
+// const elderlyCareStructuredData = {
+//   "@context": "https://schema.org",
+//   "@type": "ElderlyCare",
+//   name: "Carmel Oasis at Pushpasadan Old Age Home",
+//   alternateName: "Pushpasadan Old Age Home",
+//   telephone: "+91 8766480884",
+//   description:
+//     "A convent-led elder care home offering peaceful residential support, daily care, companionship, prayer, and dignity for senior residents.",
+//   serviceType: "Residential elder care",
+//   areaServed: "India",
+//   address: {
+//     "@type": "PostalAddress",
+//     streetAddress: "Carmel Oasis, Wanjale",
+//     addressRegion: "Raigad",
+//     addressCountry: "IN",
+//   },
+//   contactPoint: {
+//     "@type": "ContactPoint",
+//     telephone: "+91 8766480884",
+//     contactType: "resident care enquiries",
+//     name: "Sr. Anishya",
+//   },
+//   image: galleryPhotos.slice(0, 3).map((photo) => photo.src),
+// };
 
-const faqStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What kind of care does Pushpasadan Old Age Home provide?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Pushpasadan provides residential elder care in a convent-led setting, with daily support, meals, companionship, prayerful presence, and a peaceful environment for senior residents.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is the home suitable for elders who need companionship?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. The home is shaped around belonging, shared routines, visits, prayer, and community life so elders are not left to feel alone.",
-      },
-    },
-  ],
-};
+// const faqStructuredData = {
+//   "@context": "https://schema.org",
+//   "@type": "FAQPage",
+//   mainEntity: [
+//     {
+//       "@type": "Question",
+//       name: "What kind of care does Pushpasadan Old Age Home provide?",
+//       acceptedAnswer: {
+//         "@type": "Answer",
+//         text: "Pushpasadan provides residential elder care in a convent-led setting, with daily support, meals, companionship, prayerful presence, and a peaceful environment for senior residents.",
+//       },
+//     },
+//     {
+//       "@type": "Question",
+//       name: "Is the home suitable for elders who need companionship?",
+//       acceptedAnswer: {
+//         "@type": "Answer",
+//         text: "Yes. The home is shaped around belonging, shared routines, visits, prayer, and community life so elders are not left to feel alone.",
+//       },
+//     },
+//   ],
+// };
 
 export default function Home() {
   return (
     <>
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(elderlyCareStructuredData),
@@ -82,10 +83,11 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
-      />
-      <Navbar />
-      <HomePage />
-      <Footer />
+      /> */}
+      {/* <Navbar /> */}
+      {/* <HomePage /> */}
+      {/* <Footer /> */}
+      <WorkInProgress />
     </>
   );
 }
